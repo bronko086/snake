@@ -90,18 +90,7 @@ public class BoardDrawing extends JPanel {
         int xOffset = (width - (col * cellWidth)) / 2;
         int yOffset = (height - (row * cellHeight)) / 2;
 
-        if (cells.isEmpty()) {
-            for (int i = 0; i < row; i++) {
-                for (int j = 0; j < col; j++) {
-                    Rectangle latest = new Rectangle(
-                            xOffset + (j * cellWidth),
-                            yOffset + (i * cellHeight),
-                            cellWidth,
-                            cellHeight);
-                    cells.add(latest);
-                }
-            }
-        }
+        crearCeldas(xOffset, cellWidth, yOffset, cellHeight);
 
         g2d.setColor(Color.white);
         for (Rectangle cell : cells) {
@@ -119,6 +108,21 @@ public class BoardDrawing extends JPanel {
 
         pintarSerpiente(g2d);
 
+    }
+
+    private void crearCeldas(int xOffset, int cellWidth, int yOffset, int cellHeight) {
+        if (cells.isEmpty()) {
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    Rectangle latest = new Rectangle(
+                            xOffset + (j * cellWidth),
+                            yOffset + (i * cellHeight),
+                            cellWidth,
+                            cellHeight);
+                    cells.add(latest);
+                }
+            }
+        }
     }
 
     private void pintarCeldas(Graphics2D g2d, int cellWidth, int cellHeight) {
