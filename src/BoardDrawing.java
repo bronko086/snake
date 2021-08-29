@@ -10,11 +10,14 @@ import javax.swing.JPanel;
 //note: board shape and window aesthetics to be set
 //note: unification of colors not done
 
-
+/**
+ *
+ * @author p3rik
+ */
 public class BoardDrawing extends JPanel {
 
     /**
-     *
+     *@version
      */
     int b = 0;
     int row = 8;
@@ -27,6 +30,12 @@ public class BoardDrawing extends JPanel {
     //ArrayList<Portal> portals;
     //ArrayList<Player> players;
 
+    /**
+     *
+     * @param row
+     * @param col
+     * @param bs
+     */
     public BoardDrawing(int row, int col, BoardScreen bs) {
         this.bs = bs;
 
@@ -109,8 +118,15 @@ public class BoardDrawing extends JPanel {
         pintarSerpiente(g2d);
 
     }
-
-    private void crearCeldas(int xOffset, int cellWidth, int yOffset, int cellHeight) {
+    /**
+     * 
+     * @param xOffset
+     * @param cellWidth
+     * @param yOffset
+     * @param cellHeight 
+     */
+    public void crearCeldas(int xOffset, int cellWidth, int yOffset, int cellHeight) {
+      
         if (cells.isEmpty()) {
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < col; j++) {
@@ -124,8 +140,13 @@ public class BoardDrawing extends JPanel {
             }
         }
     }
-
-    private void pintarCeldas(Graphics2D g2d, int cellWidth, int cellHeight) {
+    /**
+     * 
+     * @param g2d
+     * @param cellWidth
+     * @param cellHeight 
+     */
+    public void pintarCeldas(Graphics2D g2d, int cellWidth, int cellHeight) {
         g2d.setColor(Color.BLUE);
         int i = 0;                                // i is our visible numbering
         for (Rectangle cell : cells) {
@@ -157,8 +178,12 @@ public class BoardDrawing extends JPanel {
             i++;
         }
     }
-
-    private void pintarSerpiente(Graphics2D g2d) {
+    /**
+     * 
+     * @param g2d 
+     */
+    
+    public void pintarSerpiente(Graphics2D g2d) {
         //Drawing snakes and ladders
         for (Portal port : bs.portals) {
             if (port.returnNature() == -1) {
@@ -196,6 +221,13 @@ public class BoardDrawing extends JPanel {
 		}
 	}
      */
+
+    /**
+     *
+     * @param pnos
+     * @return
+     */
+
     public String ensurePlayerPosition(int pnos) {
         String message = "";
         for (Portal port : bs.portals) {
@@ -216,6 +248,13 @@ public class BoardDrawing extends JPanel {
 		player = a;
 	}
      */
+
+    /**
+     *
+     * @param a
+     * @param pnos
+     */
+
     public void setPlayer(int a, int pnos) {
         bs.players.get(pnos).incPosition(a);
     }

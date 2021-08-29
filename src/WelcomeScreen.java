@@ -9,7 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
+/**
+ *
+ * @author p3rik
+ */
 public class WelcomeScreen extends JPanel{
     JLabel title;
     JButton go;
@@ -20,21 +23,33 @@ public class WelcomeScreen extends JPanel{
     private static final String TWO = "Two";
     MainWindow mw;
 	
+    /**
+     *
+     * @param t
+     */
     public void setTitle(String t){
         title.setText(t);
     }
 	
+    /**
+     *
+     */
     public void quitButtonActionListener(){
 	if(JOptionPane.showConfirmDialog(this, ARE_YOU_SURE) == JOptionPane.OK_OPTION)
         System.exit(0);
     }
     
-	
+    /**
+     *
+     */
     public void goButtonActionListener(){
 	mw.showCard(TWO);
     }
     
- 
+    /**
+     *
+     * @param mw
+     */
     public WelcomeScreen(MainWindow mw){
 	this.mw = mw;
 	setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));

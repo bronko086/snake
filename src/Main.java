@@ -1,5 +1,9 @@
 import javax.swing.SwingUtilities;
 
+/**
+ *
+ * @author p3rik
+ */
 public class Main {
 
     /**
