@@ -11,9 +11,13 @@ import javax.swing.JPanel;
 
 
 public class WelcomeScreen extends JPanel{
-    JLabel title = new JLabel();
-    JButton go = new JButton("New Game");
-    JButton quit = new JButton("Quit");
+    JLabel title;
+    JButton go;
+    JButton quit;
+    private static final String NEW__GAME = "New Game";
+    private static final String ARE_YOU_SURE = "Are you sure?";
+    private static final String QUIT = "Quit";
+    private static final String TWO = "Two";
     MainWindow mw;
 	
     public void setTitle(String t){
@@ -21,21 +25,25 @@ public class WelcomeScreen extends JPanel{
     }
 	
     public void quitButtonActionListener(){
-	if(JOptionPane.showConfirmDialog(this, "Are you sure?") == JOptionPane.OK_OPTION)
+	if(JOptionPane.showConfirmDialog(this, ARE_YOU_SURE) == JOptionPane.OK_OPTION)
         System.exit(0);
     }
+    
 	
     public void goButtonActionListener(){
-	mw.showCard("Two");
+	mw.showCard(TWO);
     }
+    
  
     public WelcomeScreen(MainWindow mw){
 	this.mw = mw;
 	setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        title = new JLabel();
 	add(title);
-		
+	
 	//add formatting here
-
+        go = new JButton(NEW__GAME);
+        quit = new JButton(QUIT);
 	go.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event){
 		goButtonActionListener();
@@ -51,5 +59,7 @@ public class WelcomeScreen extends JPanel{
 	add(go);
 	add(quit);
     }
+    
+   
 
 }
