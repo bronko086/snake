@@ -11,9 +11,9 @@ import javax.swing.JPanel;
 
 
 public class WelcomeScreen extends JPanel{
-	JLabel title;
-	JButton go;
-	JButton quit;
+	JLabel title = new JLabel();
+	JButton go = new JButton("New Game");
+	JButton quit = new JButton("Quit");
 	
 	MainWindow mw;
 	
@@ -34,13 +34,10 @@ public class WelcomeScreen extends JPanel{
 		this.mw = mw;
 		
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		title = new JLabel();
 		add(title);
 		
 		//add formatting here
 		
-		go = new JButton("New Game");
-		quit = new JButton("Quit");	
 		
 		go.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event){

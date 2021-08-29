@@ -89,7 +89,7 @@ public class BoardDrawing extends JPanel{
 		int cellHeight = height / row;
 		
 		int xOffset = (width - (col * cellWidth)) / 2;
-        int yOffset = (height - (row * cellHeight)) / 2;
+                int yOffset = (height - (row * cellHeight)) / 2;
 
 		
 		if(cells.isEmpty()){
@@ -121,61 +121,69 @@ public class BoardDrawing extends JPanel{
 		
 		
 		
-		g2d.setColor(Color.BLUE);
-		int i=0;                                // i is our visible numbering 
-		for(Rectangle cell : cells){
-			
-			String message = "" + cellnos[i];
-		    g2d.drawString(message,(int)cell.getCenterX(),(int)cell.getCenterY());
-			//g2d.setColor(Color.red);
-			
-		    //draw player position
-		    for(int pl = 0;pl < bs.maxPlayers;pl++)
-			if(bs.players.get(pl).returnPosition() == cellnos[i]){                         //only one player considered here
-				
-				g2d.setColor(bs.players.get(pl).returnPlayerColor());        //change to player color
-				g2d.fillRect(cell.getLocation().x + pl*cellWidth/4, cell.getLocation().y, cellWidth/4, cellHeight/4);//change to player position
-				g2d.setColor(Color.blue);
-			}
-		    
-            if(cellnos[i] == row*col-1){
-            	for(int pl = 0;pl < bs.maxPlayers;pl++)
-        			if(bs.players.get(pl).returnPosition() >= cellnos[i]){                         //only one player considered here
-        				
-        				g2d.setColor(bs.players.get(pl).returnPlayerColor());        //change to player color
-        				g2d.fillRect(cell.getLocation().x + pl*cellWidth/4, cell.getLocation().y, cellWidth/4, cellHeight/4);//change to player position
-        				g2d.setColor(Color.blue);
-        			}   
-            }
-		    i++;
-		}
+		pintarCeldas(g2d, cellWidth, cellHeight);
 		
-		//Drawing snakes and ladders
-		for(Portal port:bs.portals){
-			if(port.returnNature() == -1)
-				g2d.setColor(Color.red);
-			else 
-				g2d.setColor(Color.green);
-			
-			int ind;
-			int s = port.returnStart(); 
-			for(ind=0;ind<row*col;ind++){
-				if(cellnos[ind] == s)
-					break;
-			}
-			
-			int j;
-			int e = port.returnEnd(); 
-			for(j=0;j<row*col;j++){
-				if(cellnos[j] == e)
-					break;
-			}
-			
-			g2d.drawLine((int)cells.get(ind).getCenterX(),(int) cells.get(ind).getCenterY(),(int) cells.get(j).getCenterX(),(int)cells.get(j).getCenterY());
-			
-		}
+                pintarSerpiente(g2d);
 		
 	}
+
+    private void pintarCeldas(Graphics2D g2d, int cellWidth, int cellHeight) {
+        g2d.setColor(Color.BLUE);
+        int i=0;                                // i is our visible numbering
+        for(Rectangle cell : cells){
+            
+            String message = "" + cellnos[i];
+            g2d.drawString(message,(int)cell.getCenterX(),(int)cell.getCenterY());
+            //g2d.setColor(Color.red);
+            
+            //draw player position
+            for(int pl = 0;pl < bs.maxPlayers;pl++)
+                if(bs.players.get(pl).getPosition() == cellnos[i]){                         //only one player considered here
+                    
+                    g2d.setColor(bs.players.get(pl).getPlayerColor());        //change to player color
+                    g2d.fillRect(cell.getLocation().x + pl*cellWidth/4, cell.getLocation().y, cellWidth/4, cellHeight/4);//change to player position
+                    g2d.setColor(Color.blue);
+                }
+            
+            if(cellnos[i] == row*col-1){
+                for(int pl = 0;pl < bs.maxPlayers;pl++)
+                    if(bs.players.get(pl).getPosition() >= cellnos[i]){                         //only one player considered here
+                        
+                        g2d.setColor(bs.players.get(pl).getPlayerColor());        //change to player color
+                        g2d.fillRect(cell.getLocation().x + pl*cellWidth/4, cell.getLocation().y, cellWidth/4, cellHeight/4);//change to player position
+                        g2d.setColor(Color.blue);
+                    }
+            }
+            i++;
+        }
+    }
+
+    private void pintarSerpiente(Graphics2D g2d) {
+        //Drawing snakes and ladders
+        for(Portal port:bs.portals){
+            if(port.returnNature() == -1)
+                g2d.setColor(Color.red);
+            else
+                g2d.setColor(Color.green);
+            
+            int ind;
+            int s = port.returnStart();
+            for(ind=0;ind<row*col;ind++){
+                if(cellnos[ind] == s)
+                    break;
+            }
+            
+            int j;
+            int e = port.returnEnd();
+            for(j=0;j<row*col;j++){
+                if(cellnos[j] == e)
+                    break;
+            }
+            
+            g2d.drawLine((int)cells.get(ind).getCenterX(),(int) cells.get(ind).getCenterY(),(int) cells.get(j).getCenterX(),(int)cells.get(j).getCenterY());
+            
+        }
+    }
 	/*
 	public void ensurePlayerPosition(){
 		for(Portal port :portals){
@@ -187,7 +195,7 @@ public class BoardDrawing extends JPanel{
 	public String ensurePlayerPosition(int pnos){
 		String message = "";
 		for(Portal port :bs.portals){
-			if(bs.players.get(pnos).returnPosition() == port.returnStart()){
+			if(bs.players.get(pnos).getPosition() == port.returnStart()){
 				bs.players.get(pnos).setPosition(port.returnEnd());
 				if(port.returnNature() == 1)
 					message += "You are up through ladder at position " + port.returnStart();
